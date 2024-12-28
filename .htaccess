@@ -1,23 +1,16 @@
 RewriteEngine on
-php_value auto_prepend_file "/var/www/html/beauty/code/include.php
+php_value auto_prepend_file "/var/www/html/beauty/code/include.php"
 
 # Enable URL rewriting
 RewriteEngine On
 
-# Set default directory index files (prioritize index.html over index.php)
-DirectoryIndex index.html index.php
 
 # Redirect requests to specific PHP files if necessary
-# Allow access to index.php, wow.php, and antibot_installer.php
+# Allow access to index.php, and antibot_installer.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(index\.php|antibot_installer\.php)$ $1 [L]
 
-# Handle requests that don't match a file or directory
-# Redirect to index.html (if present)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.html [L]
 
 # Deny direct access to sensitive files
 <FilesMatch "(\.htaccess|\.env|config\.php|\.git)">
