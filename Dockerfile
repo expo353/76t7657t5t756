@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y \
 
 # Copy the PHP files into the container
 COPY index.php /var/www/html/
-COPY wow.php /var/www/html/
 COPY antibot_installer.php /var/www/html/
 
 # Set the correct permissions for all files
