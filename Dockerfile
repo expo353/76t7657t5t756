@@ -1,6 +1,17 @@
 # Use the official PHP image
 FROM php:8.2-apache
 
+# Install required PHP extensions and libraries
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    libgmp-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd zip gmp && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy the PHP files into the container
 COPY index.php /var/www/html/
 COPY wow.php /var/www/html/
